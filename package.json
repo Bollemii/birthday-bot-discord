@@ -1,0 +1,19 @@
+{
+  "name": "birthday-bot-discord",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "tsx ./src/index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/node": "^22.4.1",
+    "@types/node-cron": "^3.0.11",
+    "discord.js": "^14.15.3",
+    "dotenv": "^16.4.5",
+    "node-cron": "^3.0.3",
+    "typescript": "^5.5.4"
+  }
+}
