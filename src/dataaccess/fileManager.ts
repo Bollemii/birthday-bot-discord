@@ -1,7 +1,8 @@
 import fs from 'fs';
 
 const checkFileExists = (path: string) => {
-    fs.existsSync(path) || fs.writeFileSync(path, '{}', 'utf8');
+    const defaultData = path.endsWith('.json') ? '{}' : '';
+    fs.existsSync(path) || fs.writeFileSync(path, defaultData, 'utf8');
 };
 
 export const readFile = (path: string) => {

@@ -1,12 +1,13 @@
 import { SlashCommandBuilder, time, TimestampStyles } from "discord.js";
 
 import { getBirthday } from "dataaccess/birthday.js";
+import { Command } from "types/Command.js";
 
-export const getMyBirthdayCommand = {
+export const getMyBirthdayCommand : Command = {
     data: new SlashCommandBuilder()
         .setName("get-my-birthday")
         .setDescription("Get your birthday"),
-    async execute(interaction: any) {
+    async execute(_, interaction) {
         const birthday = getBirthday(interaction.user.id);
         if (!birthday) {
             await interaction.reply({

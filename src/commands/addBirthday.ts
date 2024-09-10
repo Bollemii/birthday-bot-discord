@@ -1,8 +1,10 @@
 import { SlashCommandBuilder, time, TimestampStyles } from "discord.js";
 
 import { addBirthday } from "dataaccess/birthday.js";
+import { Command } from "types/Command.js";
+import { publishBirthdaysList } from "./publishBirthdaysList.js";
 
-export const addBirthdayCommand = {
+export const addBirthdayCommand : Command = {
     data: new SlashCommandBuilder()
         .setName("add-birthday")
         .setDescription("Register your birthday")
@@ -12,9 +14,9 @@ export const addBirthdayCommand = {
                 .setDescription("Your birthday date (format: YYYY-MM-DD)")
                 .setRequired(true)
         ),
-    async execute(interaction: any) {
+    async execute(client, interaction) {
         const date = interaction.options.getString("date");
-        if (!date.match(/^\d{4}-\d{2}-\d{2}$/)) {
+        if (!date || !date.match(/^\d{4}-\d{2}-\d{2}$/)) {
             await interaction.reply("Wrong date format. Please use YYYY-MM-DD");
             return;
         }
@@ -40,6 +42,7 @@ export const addBirthdayCommand = {
                 )}`,
                 ephemeral: true,
             });
+            publishBirthdaysList(client, interaction.channelId);
         } catch (err: any) {
             await interaction.reply({ content: err.message, ephemeral: true });
         }

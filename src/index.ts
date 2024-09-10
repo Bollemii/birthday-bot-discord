@@ -5,6 +5,8 @@ import { commands } from 'commands/index.js';
 import { token } from 'config.js';
 import { startCheckBirthdayJob } from 'job/index.js';
 
+const CHANNEL_ID_LISTENING = "1275135447063986222";
+
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
 // Starting listener
@@ -25,7 +27,10 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!command) return;
 
 	try {
-		await command.execute(interaction);
+		if (interaction.channelId !== CHANNEL_ID_LISTENING) {
+			return;
+		}
+		await command.execute(client, interaction);
 	} catch (error) {
 		console.error(error);
 		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
