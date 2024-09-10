@@ -3,14 +3,20 @@ import { SlashCommandBuilder } from "discord.js";
 
 export const removeMyBirthdayCommand = {
     data: new SlashCommandBuilder()
-        .setName('remove-my-birthday')
-        .setDescription('Remove your birthday'),
+        .setName("remove-my-birthday")
+        .setDescription("Remove your birthday"),
     async execute(interaction: any) {
         try {
             removeBirthday(interaction.user.id);
-            await interaction.reply("Birthday removed");
+            await interaction.reply({
+                content: "Your birthday has been removed",
+                ephemeral: true,
+            });
         } catch (error: any) {
-            await interaction.reply(error.message);
+            await interaction.reply({
+                content: error.message,
+                ephemeral: true,
+            });
         }
-    }
+    },
 };

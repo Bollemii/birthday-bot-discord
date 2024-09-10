@@ -11,5 +11,5 @@ export const commands: Command[] = [
     addBirthdayCommand,
     getMyBirthdayCommand,
     getBirthdaysListCommand,
-    removeMyBirthdayCommand
+    removeMyBirthdayCommand,
 ];
